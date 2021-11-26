@@ -4,6 +4,8 @@ import { CanvasClient, CANVAS_DRAFT_STATE, enhance } from "@uniformdev/canvas";
 import { enhancers } from "../enhancers";
 
 module.exports = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   const client = new CanvasClient({
     apiKey: process.env.UNIFORM_API_KEY,
     apiHost: process.env.UNIFORM_API_HOST,

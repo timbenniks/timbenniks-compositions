@@ -7,6 +7,8 @@ import linkResolver from "../enhancers/prismic/linkresolver";
 import htmlSerializer from "../enhancers/prismic/htmlserializer";
 
 module.exports = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   const dev = process.env.NODE_ENV === "development";
   const link = `${dev ? "http://" : "https://"}${req.headers.host}${req.url}`;
   const parsedLink = new url.URL(link);
