@@ -1,5 +1,4 @@
 import { contentfulQueryModelConverter } from "./contentful/contentfulQueryModelConverter";
-import { contentfulRichTextToHtmlEnhancer } from "./contentful/contentfulRichTextToHtmlEnhancer";
 
 export function asDay(date) {
   const day = new Date(date).getDate().toString();
