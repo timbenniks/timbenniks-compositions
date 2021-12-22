@@ -1,8 +1,26 @@
-import { asDay, asMonth, asYear } from "../helpers";
+import { isDateBeforeToday, asDay, asMonth, asYear } from "../helpers";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 
-export const contentfulModelConverter = ({ parameter }) => {
-  const entry = parameter.value;
+export const contentfulQueryModelConverter = ({ parameter }) => {
+  const entries = parameter.value;
+  let result = null;
 
+  if (entries.fields) {
+    result = transformContentfulFields(entries);
+  } else {
+    result = [];
+    entries.forEach((entry) => {
+      result.push(transformContentfulFields(entry));
+    });
+  }
+
+  parameter.value = result;
+
+  return parameter.value;
+};
+
+function transformContentfulFields(entry) {
   if (entry) {
     const content = { ...entry.fields };
 
@@ -31,12 +49,33 @@ export const contentfulModelConverter = ({ parameter }) => {
         content[fieldKey] = transformContentfulImage(content[fieldKey]);
       }
       // add date model
-      else if (fieldKey === "publicationDate") {
+      else if (fieldKey === "publicationDate" || fieldKey === "date") {
         content.date = {
           day: asDay(content[fieldKey]),
           month: asMonth(content[fieldKey]),
           year: asYear(content[fieldKey]),
+          date: content[fieldKey],
+          upcoming: !isDateBeforeToday(new Date(content[fieldKey])),
         };
+        // rich text
+      } else if (content[fieldKey]?.nodeType === "document") {
+        const html = documentToHtmlString(content[fieldKey], {
+          renderNode: {
+            [BLOCKS.LIST_ITEM]: (node, next) =>
+              `<li>${next(node.content).replace(/<[^>]*>/g, "")}</li>`,
+          },
+          renderMark: {
+            [MARKS.CODE]: (text) => {
+              const breaks = (text.match(/\n/g) || []).length;
+              if (breaks > 0) {
+                return `<pre><code>${text}</code></pre>`;
+              } else {
+                return `<code>${text}</code>`;
+              }
+            },
+          },
+        });
+        content[fieldKey] = html;
       }
     });
 
@@ -49,8 +88,7 @@ export const contentfulModelConverter = ({ parameter }) => {
 
     return content;
   }
-  return parameter.value;
-};
+}
 
 function transformContentfulImage(imageField) {
   let imageUrl = imageField?.fields?.file?.url;

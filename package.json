@@ -4,12 +4,12 @@
   "private": true,
   "dependencies": {
     "@prismicio/client": "^5.1.0",
-    "@uniformdev/canvas-prismic": "^13.0.0",
-    "@contentful/rich-text-html-renderer": "^15.8.0",
-    "@uniformdev/canvas": "^13.0.0",
-    "@uniformdev/canvas-bigcommerce": "^13.0.0",
-    "@uniformdev/canvas-contentful": "^13.0.0",
-    "contentful": "^9.1.4",
+    "@uniformdev/canvas-prismic": "^14.0.0",
+    "@contentful/rich-text-html-renderer": "^15.10.1",
+    "@uniformdev/canvas": "^14.0.0",
+    "@uniformdev/canvas-bigcommerce": "^14.0.0",
+    "@uniformdev/canvas-contentful": "^14.0.0",
+    "contentful": "^9.1.5",
     "highlight.js": "^11.3.1",
     "isomorphic-unfetch": "^3.1.0",
     "prismic-dom": "^2.2.6"

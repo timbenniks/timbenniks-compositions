@@ -1,10 +1,10 @@
 import {
-  createContentfulEnhancer,
+  createContentfulQueryEnhancer,
   ContentfulClientList,
 } from "@uniformdev/canvas-contentful";
 import { createClient } from "contentful";
 
-export const contentfulEnhancer = () => {
+export const contentfulQueryEnhancer = () => {
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     environment: process.env.CONTENTFUL_ENVIRONMENT,
@@ -20,14 +20,12 @@ export const contentfulEnhancer = () => {
 
   const clientList = new ContentfulClientList({ client, previewClient });
 
-  return createContentfulEnhancer({
-    client: clientList,
-    useBatching: false,
+  return createContentfulQueryEnhancer({
+    clients: clientList,
     createQuery: ({ defaultQuery }) => {
       return {
         ...defaultQuery,
         select: "fields,metadata.tags",
-        include: 1,
       };
     },
   });
