@@ -1,4 +1,5 @@
 import { contentfulQueryModelConverter } from "./contentful/contentfulQueryModelConverter";
+import { contentfulRichTextToHtmlEnhancer } from "./contentful/contentfulRichTextToHtmlEnhancer";
 
 export function asDay(date) {
   const day = new Date(date).getDate().toString();
@@ -19,7 +20,7 @@ export function isDateBeforeToday(date) {
 
 export function enhanceItemOutsideEnhancers(item) {
   const entry = contentfulQueryModelConverter({
-    parameter: { value: entryWithRichText },
+    parameter: { value: item },
   });
 
   return entry;
