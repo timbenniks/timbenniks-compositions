@@ -44,8 +44,8 @@ module.exports = function (type, element, content, children) {
       <figure style="aspect-ratio: ${element.dimensions.width}/${
       element.dimensions.height
     };">
-        <img srcset="${getSrcSet(element.url, [300, 400, 500, 600, 700, 800])}"
-             sizes="(max-width: 700px) 90vw, (min-width: 880px) 800px"
+        <img srcset="${getSrcSet(element.url, [300, 400, 500, 600, 700, 800, 1200, 1440])}"
+             sizes="(max-width: 700px) 90vw, (min-width: 880px) 1440px"
              alt="${element.alt}"
              loading="lazy"
              width="${element.dimensions.width}"
