@@ -56,9 +56,9 @@ module.exports = async (req, res) => {
   );
 
   const enhancers = new EnhancerBuilder()
-    .data("selectedTags", () => {
-      return selectedTags;
-    })
+    // .data("selectedTags", () => {
+    //   return selectedTags;
+    // })
     .component("videopage", (videoPageVideo) =>
       videoPageVideo.data("metadata", () => {
         return {
@@ -78,6 +78,13 @@ module.exports = async (req, res) => {
             contentUrl: `https://timbenniks.dev/videos/slug/${slug}`,
             uploadDate: video.date.date,
           },
+        };
+      })
+    )
+    .component("videoPageHero", (videoPageHero) =>
+      videoPageHero.data("hero", () => {
+        return {
+          title: video.title,
         };
       })
     )
