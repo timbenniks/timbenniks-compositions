@@ -74,7 +74,7 @@ module.exports = async (req, res) => {
           description: video.description,
           thumbnailUrl: [video.poster.src],
           embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
-          contentUrl: `https://timbenniks.dev/videos/slug/${path}`,
+          contentUrl: `https://timbenniks.dev/videos/slug/${slug}`,
           uploadDate: video.date.date,
         },
       };
