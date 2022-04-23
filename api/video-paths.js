@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
   const client = getClient();
   const videos = await client.getEntries({
     content_type: "video",
+    limit: 200,
   });
 
   const paths = videos.items.map((video) => {
