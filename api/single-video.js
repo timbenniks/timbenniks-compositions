@@ -59,26 +59,28 @@ module.exports = async (req, res) => {
     .data("selectedTags", () => {
       return selectedTags;
     })
-    .data("metadata", () => {
-      return {
-        type: "video",
-        title: video.title,
-        description: video.description,
-        image: video.poster.src,
-        publicationDate: video.date.date,
-        canonical: `https://timbenniks.dev/videos/${slug}`,
-        structuredData: {
-          "@context": "http://schema.org",
-          "@type": "VideoObject",
-          name: video.title,
+    .component("videopage", (videoPageVideo) =>
+      videoPageVideo.data("metadata", () => {
+        return {
+          type: "video",
+          title: video.title,
           description: video.description,
-          thumbnailUrl: [video.poster.src],
-          embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
-          contentUrl: `https://timbenniks.dev/videos/slug/${slug}`,
-          uploadDate: video.date.date,
-        },
-      };
-    })
+          image: video.poster.src,
+          publicationDate: video.date.date,
+          canonical: `https://timbenniks.dev/videos/${slug}`,
+          structuredData: {
+            "@context": "http://schema.org",
+            "@type": "VideoObject",
+            name: video.title,
+            description: video.description,
+            thumbnailUrl: [video.poster.src],
+            embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
+            contentUrl: `https://timbenniks.dev/videos/slug/${slug}`,
+            uploadDate: video.date.date,
+          },
+        };
+      })
+    )
     .component("videoPageVideo", (videoPageVideo) =>
       videoPageVideo.data("video", () => {
         return video;
