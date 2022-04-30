@@ -27,7 +27,16 @@ module.exports = async (req, res) => {
     });
   }
 
-  const items = entries.items.map((item) => enhanceItemOutsideEnhancers(item));
+  const items = entries.items
+    .map((item) => enhanceItemOutsideEnhancers(item))
+    .map((item) => {
+      // remove content due to excessive size
+      item.content = null;
+      delete item.content;
+      return {
+        item,
+      };
+    });
 
   const tagData = await client.getTags();
   const tags = tagData.items.map((item) => {

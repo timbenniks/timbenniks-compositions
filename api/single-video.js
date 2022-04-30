@@ -1,4 +1,5 @@
 import * as url from "url";
+
 import fetch from "isomorphic-unfetch";
 
 import { getClient } from "../enhancers/contentful/client";
@@ -56,9 +57,9 @@ module.exports = async (req, res) => {
   );
 
   const enhancers = new EnhancerBuilder()
-    // .data("selectedTags", () => {
-    //   return selectedTags;
-    // })
+    .data("selectedTags", () => {
+      return selectedTags;
+    })
     .component("videopage", (videoPageVideo) =>
       videoPageVideo.data("metadata", () => {
         return {
