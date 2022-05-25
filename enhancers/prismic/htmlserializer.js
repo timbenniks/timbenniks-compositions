@@ -3,7 +3,7 @@ const prismicDOM = require("prismic-dom");
 const linkResolver = require("./linkresolver");
 
 function concatCloudinaryUrl(url, opts) {
-  return `https://res.cloudinary.com/dwfcofnrd/image/fetch/f_auto,q_auto,w_${opts.width}/${url}`;
+  return `https://res.cloudinary.com/timbenniks/image/fetch/f_auto,q_auto,w_${opts.width}/${url}`;
 }
 
 function getSrcSet(baseUrl, widths) {
@@ -44,7 +44,10 @@ module.exports = function (type, element, content, children) {
       <figure style="aspect-ratio: ${element.dimensions.width}/${
       element.dimensions.height
     };">
-        <img srcset="${getSrcSet(element.url, [300, 400, 500, 600, 700, 800, 1200, 1440])}"
+        <img srcset="${getSrcSet(
+          element.url,
+          [300, 400, 500, 600, 700, 800, 1200, 1440]
+        )}"
              sizes="(max-width: 700px) 90vw, (min-width: 880px) 1440px"
              alt="${element.alt}"
              loading="lazy"
