@@ -3,7 +3,7 @@ const prismicDOM = require("prismic-dom");
 const linkResolver = require("./linkresolver");
 
 function concatCloudinaryUrl(url, opts) {
-  return `https://res.cloudinary.com/timbenniks/image/fetch/f_auto,q_auto,w_${opts.width}/${url}`;
+  return `https://res.cloudinary.com/dwfcofnrd/image/fetch/f_auto,q_auto,w_${opts.width}/${url}`;
 }
 
 function getSrcSet(baseUrl, widths) {
