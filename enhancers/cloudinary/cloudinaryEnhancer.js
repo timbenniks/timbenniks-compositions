@@ -1,4 +1,4 @@
-export const CANVAS_CLOUDINARY_PARAMETER_TYPES = "cloudinary-parameter";
+export const CANVAS_CLOUDINARY_PARAMETER_TYPES = "cloudinary-media-selector";
 
 function createSrcSet(
   baseUrl,
