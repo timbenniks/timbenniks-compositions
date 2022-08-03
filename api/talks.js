@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
 
   entries = await client.getEntries({
     content_type: "talk",
+    order: "-fields.date",
   });
 
   const items = entries.items.map((item) => enhanceItemOutsideEnhancers(item));
